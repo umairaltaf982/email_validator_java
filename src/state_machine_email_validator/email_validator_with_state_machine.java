@@ -30,12 +30,12 @@ public class email_validator_with_state_machine {
             return false;
         }
 
-        for (int i = 0; i < email.length(); i++) {
+        for (int i = 1; i < email.length(); i++) {
             char c = email.charAt(i);
             switch (state) {
                 case START:
                     if (c == '@') {
-                        state = State.INVALID; // Invalid if we directly go to '@'
+                        return false; // Invalid if we directly go to '@'
                     } else if (Character.isDigit(c)) {
                         state = State.LOCAL; // Valid start of the local part
                     } else {
@@ -47,7 +47,7 @@ public class email_validator_with_state_machine {
                     if (c == '@') {
                         state = State.DOMAIN; // Transition to domain part
                     } else if (Character.isDigit(c)) {
-                        // Stay in the local part
+                        // Allow digits in the local part
                     } else {
                         return false; // Invalid character in local part
                     }
@@ -56,7 +56,7 @@ public class email_validator_with_state_machine {
                 case DOMAIN:
                     if (c == '.') {
                         state = State.TLD; // Transition to TLD part
-                    } else if (!Character.isLetterOrDigit(c)) {
+                    } else if (!Character.isLetter(c)) {
                         return false; // Invalid character in domain part
                     }
                     break;
