@@ -74,7 +74,7 @@ public class email_validator_with_state_machine {
     }
 
     public static void main(String[] args) {
-    	email_validator_with_state_machine ev = new email_validator_with_state_machine("f223737@n1u.pk");
+    	email_validator_with_state_machine ev = new email_validator_with_state_machine("f223737@nu.pk");
         System.out.println("Is valid email? " + ev.checker());
     }
 }
